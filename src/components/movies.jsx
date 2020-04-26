@@ -4,13 +4,19 @@ import Like from './common/like';
 import Pagination from './common/pagination';
 import { paginate } from '../utils/paginate';
 import ListGroup from './common/pagination';
+import { getGenres } from '../services/fakeGenreService';
 
 class Movies extends Component {
   state = {
-    movies: getMovies(),
+    movies: [],
     currentPage: 1,
     pageSize: 4,
+    genres: [],
   };
+
+  componentDidMount() {
+    this.setState({ movies: getMovies(), genres: getGenres() });
+  }
 
   handleLike = (movie) => {
     const movies = [...this.state.movies];
@@ -40,7 +46,7 @@ class Movies extends Component {
     return (
       <div className="row">
         <div className="col-2">
-          <ListGroup items=/>
+          <ListGroup items={this.state.genres} />
         </div>
         <div className="col">
           <p>Showhing {count} movies in the database.</p>
