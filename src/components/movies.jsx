@@ -42,19 +42,8 @@ class Movies extends Component {
     this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
-  handleSort = (path) => {
-    console.log(path);
-    const sortColumn = { ...this.state.sortColumn };
-    console.log(sortColumn.path);
-    if (sortColumn.path === path) {
-      console.log('hey');
-      sortColumn.order = sortColumn.order === 'asc' ? 'desc' : 'asc';
-    } else {
-      sortColumn.path = path;
-      sortColumn.order = 'asc';
-    }
+  handleSort = (sortColumn) => {
     this.setState({ sortColumn });
-    console.log(this.state.sortColumn);
   };
   render() {
     const { length: count } = this.state.movies;
@@ -92,6 +81,7 @@ class Movies extends Component {
           <p>Showhing {filtered.length} movies in the database.</p>
           <MoviesTable
             movies={movies}
+            sortColumn={this.state.sortColumn}
             onLike={this.handleLike}
             onDelete={this.handleDelete}
             onSort={this.handleSort}
